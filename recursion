@@ -45,3 +45,99 @@ int ans = function (5,4);
 printf("ans is %d\n",ans);
 return 0;
 }
+
+3.
+利用二分查找法查找一组数据中是否有用户输入的数字，如果有则输出找到了，如果没有则输出没有该数。
+
+package 二分查找;
+
+import java.util.Arrays;
+import java.util.Scanner;
+
+//for循环
+public class Main {
+	public static void main(String[] args) {
+		Scanner input=new Scanner(System.in);
+		int[] nums={3,4,5,1,2,9,6,7,10};
+		Arrays.sort(nums);
+		int left=0;
+		int right=nums.length-1;
+		int mid=(left+right)/2;
+		int key=input.nextInt();
+		while(right>left){
+			if(key>nums[mid])
+				left=mid+1;
+			else if(key==nums[mid]){
+				System.out.println("找到了");
+				return;
+			}
+			else if(key<nums[mid])
+				right=mid-1;
+			mid=(left+right)/2;
+		}
+		System.out.println("没有找到");
+	}
+
+}
+
+//递归求解
+public class Main {
+	public static int[] nums={1,2,3,4,5,6,7};
+	public static boolean func(int left,int right,int mid,int key) {
+		if(left>right)
+			return false;
+		if(key>nums[mid]){
+			left=mid+1;
+		}
+		else if(key==nums[mid]){
+			System.out.println("找到了");
+			return true;
+		}
+		else if(key<nums[mid])
+			right=mid-1;
+		mid=(left+right)/2;
+		func(left, right, mid, key);
+		return false;
+	}
+	public static void main(String[] args) {
+		Scanner input=new Scanner(System.in);
+		int key=input.nextInt();
+		func(0,nums.length-1,(0+nums.length)/2,key);
+	}
+}
+
+4。汉诺塔：
+
+有三根杆子A，B，C。A杆上有N个(N>1)穿孔圆环，盘的尺寸由下到上依次变小。要求按下列规则将所有圆盘移至C杆：
+
+每次只能移动一个圆盘；
+大盘不能叠在小盘上面。
+提示：可将圆盘临时置于B杆，也可将从A杆移出的圆盘重新移回A杆，但都必须遵循上述两条规则。
+
+问：如何移？最少要移动多少次？
+
+import java.util.Scanner;
+
+public class Hanoi {
+    
+    //使用递归法求解含有n个不同大小盘子的汉诺塔移动路径，参数n为盘子数，把A塔上盘子全部移动到C塔上，B为过渡塔
+    public static void recursionHanoi(int n,char A,char B,char C){
+        if(n == 1){
+            System.out.print(A+"——>"+C+"\n");    
+        }
+        else{
+            recursionHanoi(n-1,A,C,B);         //使用递归先把A塔最上面的n-1个盘子移动到B塔上，C为过渡塔
+            System.out.print(A+"——>"+C+"\n");       //把A塔中底下最大的圆盘，移动到C塔上
+            recursionHanoi(n-1,B,A,C);         //使用递归把B塔上n-1个盘子移动到C塔上，A为过渡塔
+        }
+    }
+
+   public static void main(String[] args){
+        System.out.println("请输入盘子总数n:");
+        Scanner in = new Scanner(System.in);
+        int n = in.nextInt();    
+        recursionHanoi(n,'A','B','C');    
+    }
+}
+    return c;.
+    return c;
