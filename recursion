@@ -1,0 +1,19 @@
+##递归阶乘
+int factorial(int n)
+{
+	if (n <2)
+		return 1;
+	else
+		return n*factorial(n - 1);
+}
+int main()
+{
+	int n = 0;
+	printf("求n的阶乘,请输入n:\n");
+	scanf("%d", &n);
+	int product = 0;
+	product = factorial(n);
+	printf("%d\n", product);
+	return 0;
+}
+
