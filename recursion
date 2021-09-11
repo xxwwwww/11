@@ -1,3 +1,4 @@
+1.
 ##递归阶乘
 int factorial(int n)
 {
@@ -17,3 +18,30 @@ int main()
 	return 0;
 }
 
+
+2.
+#include<stdio.h>
+#include<stdlib.h>
+int function (int n,int c) {
+if(n <= 1) {
+    return c;
+}
+if(n % 2 == c % 3){
+printf("A %d %d\n", n, c);
+int temp = function(n-1, c+2);
+printf("B %d\n", temp);
+return temp / 2;
+}
+else{
+printf("C %d %d\n", n, c);
+int temp = function (n - 1, c /2);
+printf("D %d\n", temp);
+return temp +1;
+}
+}
+
+int main(void){
+int ans = function (5,4);
+printf("ans is %d\n",ans);
+return 0;
+}
