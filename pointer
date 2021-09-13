@@ -1,0 +1,45 @@
+1.
+#include <stdio.h>
+#include <stdlib.h>
+
+void g(int x, int * y) {
+  printf("In g, x = %d, *y = %d\n", x, *y);
+  x++;
+  *y = *y - x;
+  y = &x;
+}
+
+void f(int * a, int b) {
+  printf("In f, *a = %d, b = %d\n", *a, b);
+  *a += b;
+  b *= 2;
+  g(*a, &b);
+  printf("Back in f, *a = %d, b = %d\n", *a, b);
+}
+
+
+int main(void) {
+  int x = 3;
+  int y = 4;
+  f(&x, y);
+  printf("In main: x = %d, y = %d\n", x, y);
+  return EXIT_SUCCESS;
+}
+
+##答案
+In f, *a = 3, b = 4
+In g, x = 7, *y = 8
+Back in f, *a = 7, b = 0
+In main: x = 7, y = 4
+
+
+2.
+static int a[2][3]={1,3,5,2,4,6};
+       int * add[2][3]={*a,*a+1,*a+2,*(a+1),*(a+1)+1,*(a+1)+2};
+       int **p,i;
+       p=add[0];
+       for(i=0;i<6;i++)
+        { printf("%d  ",**p);  p++;}
+       printf("\n");
+###  *(a+1) = *（a + 1) + 0表示第一行第零列元素地址
+###  *a + 1 = *(a + 0）+ 1表示第0行第一列元素地址
